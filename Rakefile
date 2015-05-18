@@ -15,7 +15,7 @@ task :time_spent_average,
 end
 
 desc 'Calculate the standard deviation of the amount of pageviews'
-task :page_views_standard_deviation,
-     :identifier, :visits_filename, :spread_filename do
-  puts MyDataProcessors::PageViewsSD(args)
+task :page_views_sd,
+     :identifier, :visits_filename, :spread_filename do |_, args|
+  puts MyDataProcessors::PageViewsSD.call(args)
 end

@@ -22,6 +22,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
+  activesupport (~> 4.2.1)
   byebug (~> 4.0.2)
   rake (~> 10.4.2)
