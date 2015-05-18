@@ -14,10 +14,7 @@ module MyDataProcessors
     end
 
     def process!
-      process_file(filename) do |chunk|
-        process_chunk(chunk)
-      end
-
+      process_file(filename) { |chunk| process_chunk(chunk) }
       result
     end
 

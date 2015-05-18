@@ -20,14 +20,8 @@ module MyDataProcessors
     end
 
     def process!
-      process_file(filename) do |chunk|
-        process_chunk_selection(chunk)
-      end
-
-      chunks_to_check.each do |chunk|
-        process_chunk(chunk)
-      end
-
+      process_file(filename) { |chunk| process_chunk_selection(chunk) }
+      chunks_to_check.each { |chunk| process_chunk(chunk) }
       result
     end
 
