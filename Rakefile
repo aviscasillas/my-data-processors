@@ -8,10 +8,14 @@ task :unique_users_per_day, :identifier, :filename do |_, args|
   puts MyDataProcessors::UniqueUsersPerDay.call(args)
 end
 
-desc 'Calculate the time spent average per-day'
-task :time_spent_average do
+desc 'Calculate the time spent average per-day on some regex identifier but also visited some identifer'
+task :time_spent_average,
+     :spent_on, :visit_also, :since, :to, :filename do |_, args|
+  puts MyDataProcessors::TimeSpentAverage.call(args)
 end
 
 desc 'Calculate the standard deviation of the amount of pageviews'
-task :page_views_standard_deviation do
+task :page_views_standard_deviation,
+     :identifier, :visits_filename, :spread_filename do
+  puts MyDataProcessors::PageViewsSD(args)
 end
