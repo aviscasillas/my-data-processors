@@ -2,7 +2,7 @@ module MyDataProcessors
   module Support
     module Callable
       def call(*args)
-        new(*args).process!.result
+        new(*args).process!
       end
     end
   end

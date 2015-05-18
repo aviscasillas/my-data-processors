@@ -28,7 +28,7 @@ module MyDataProcessors
         process_chunk(chunk)
       end
 
-      self
+      result
     end
 
     def process_chunk_selection(chunk)

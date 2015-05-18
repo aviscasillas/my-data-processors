@@ -17,7 +17,8 @@ module MyDataProcessors
       process_file(filename) do |chunk|
         process_chunk(chunk)
       end
-      self
+
+      result
     end
 
     def process_chunk(chunk)

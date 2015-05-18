@@ -19,7 +19,7 @@ module MyDataProcessors
     def process!
       process_file(visits_filename) { |chunk| process_visits_chunk(chunk) }
       process_file(spread_filename) { |chunk| process_spread_chunk(chunk) }
-      self
+      result
     end
 
     def process_visits_chunk(chunk)
