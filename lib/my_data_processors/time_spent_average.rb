@@ -38,23 +38,16 @@ module MyDataProcessors
 
       chunk.data.each do |userid, timeslices|
         next unless also_visitors.key?(userid)
-
-        slices_to_check.each do |slice|
-          timeslice = timeslices[slice.to_s]
-          next unless timeslice
-          seconds_spent += timeslice[0].to_i
-        end
+        seconds_spent += fetch_seconds_spent_in(timeslices)
       end
 
       seconds_per_day << seconds_spent
     end
 
     def result
-      return 0 if @seconds_per_day.size == 0
-      @seconds_per_day.sum / @seconds_per_day.size
+      return 0 if seconds_per_day.size == 0
+      seconds_per_day.sum / seconds_per_day.size
     end
-
-    private
 
     def also_visitors
       @also_visitors ||= {}
@@ -66,6 +59,18 @@ module MyDataProcessors
 
     def seconds_per_day
       @seconds_per_day ||= []
+    end
+
+    private
+
+    def fetch_seconds_spent_in(timeslices)
+      sec = 0
+      slices_to_check.each do |slice|
+        timeslice = timeslices[slice.to_s]
+        next unless timeslice
+        sec += timeslice[0].to_i
+      end
+      sec
     end
   end
 end
