@@ -23,25 +23,32 @@ module MyDataProcessors
     end
 
     def process_visits_chunk(chunk)
-      return if chunk.id != identifier
-
-      chunk.data.each do |_, a|
-        a.each { |v| accumulate(v[1]) }
+      with_chunk_in_scope(chunk) do |ch|
+        ch.data.each do |_, a|
+          a.each { |v| accumulate(v[1]) }
+        end
       end
     end
 
     def process_spread_chunk(chunk)
-      return if chunk.id != identifier
-
-      chunk.data.each do |_, timeslices|
-        timeslices.each do |_, a|
-          accumulate(a[1])
+      with_chunk_in_scope(chunk) do |ch|
+        ch.data.each do |_, timeslices|
+          timeslices.each do |_, a|
+            accumulate(a[1])
+          end
         end
       end
     end
 
     def result
       standard_deviation
+    end
+
+    private
+
+    def with_chunk_in_scope(chunk, &block)
+      return if chunk.id != identifier
+      block.call(chunk)
     end
   end
 end
