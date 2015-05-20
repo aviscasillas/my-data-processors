@@ -6,8 +6,7 @@ FactoryGirl.define do
     factory :visits_chunk do
       data('1' => [[1, 1], [1, 1]],
            '2' => [[1, 1], [1, 1]],
-           '3' => [[1, 1], [1, 1]],
-           '2' => [[1, 1], [1, 1]])
+           '3' => [[1, 1], [1, 1]])
     end
 
     factory :spread_chunk do
