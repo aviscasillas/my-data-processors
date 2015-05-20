@@ -3,6 +3,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'my_data_processors'
 
+# HACK
+#   Fix for travis bundle exec rake.
+require 'rspec/core/rake_task'
+task default: :spec
+RSpec::Core::RakeTask.new
+# end HACK
+
 desc 'Calculate unique users for a specified file and identifier (eg. facebook.com)'
 task :unique_users_per_day, :identifier, :filename do |_, args|
   puts MyDataProcessors::UniqueUsersPerDay.call(args)
