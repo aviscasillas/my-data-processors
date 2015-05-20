@@ -4,7 +4,7 @@ module MyDataProcessors
       def slice_range(hour_since, hour_to)
         since = slice_from_time(hour_since)
         to = slice_from_time(hour_to)
-        (since..to).step(1).to_a
+        (since..to).to_a
       end
 
       def slice_from_time(time)
