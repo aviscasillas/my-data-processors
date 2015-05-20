@@ -6,9 +6,14 @@ module MyDataProcessors
     class Chunk
       attr_accessor :id, :date, :data
 
-      def initialize(id, date, encoded_data)
-        @id, @date = id, date
-        @data = decode(encoded_data)
+      def initialize(attrs = {})
+        @id, @date, @data = attrs[:id], attrs[:date], attrs[:data]
+        self.encdata = attrs[:encdata]
+      end
+
+      def encdata=(encdata)
+        return unless encdata
+        @data = decode(encdata)
       end
 
       def decode(enc_data)
