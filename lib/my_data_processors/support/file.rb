@@ -1,24 +1,17 @@
+require 'csv'
 require 'my_data_processors/models/chunk'
 
 module MyDataProcessors
   module Support
     module File
-      def process_file(filename, &block)
-        buffer = []
-        ::File.foreach(filename).each do |line|
-          buffer << line
-
-          next if line.length > 3
-
-          block.call(chunk_from_file_line(buffer.join))
-          buffer.clear
+      def process_file(filename)
+        CSV.foreach(filename, col_sep: "\t") do |line|
+          yield(chunk_from_file_line(line))
         end
       end
 
       def chunk_from_file_line(line)
-        args = line.split("\t").compact
-        attrs = { id: args[0], date: args[1], encdata: args[2] }
-
+        attrs = { id: line[0], date: line[1], encdata: line[2] }
         MyDataProcessors::Models::Chunk.new(attrs)
       end
     end
