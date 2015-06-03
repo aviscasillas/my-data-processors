@@ -84,9 +84,3 @@ $ rake 'page_views_sd[facebook.com, /your/full/path/to/the/visits/file, /your/fu
 ```
 
 > Response is a float number representing the standard deviation.
-
-## Extra Comments
-
-The format of the files described above was not exactly what I found in the real case.
-
-So, take into account that the file reader is a little tricky to solve the problems found (see: https://github.com/aviscasillas/my-data-processors/blob/master/lib/my_data_processors/support/file.rb#L9-L11).
